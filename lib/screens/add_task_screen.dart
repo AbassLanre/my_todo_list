@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:my_todo_list/models/tasks.dart';
 
-class AddTaskScreen extends StatelessWidget {
+class AddTaskScreen extends StatefulWidget {
+  final Function addToScreen;
+  AddTaskScreen({ this.addToScreen});
+
   @override
+  _AddTaskScreenState createState() => _AddTaskScreenState();
+}
+
+class _AddTaskScreenState extends State<AddTaskScreen> {
+  String addTask;
+
+
+
+@override
   Widget build(BuildContext context) {
-    TextEditingController taskController = TextEditingController();
+
     return Container(
       color: Color(0xff757575),
       child: Container(
@@ -38,12 +51,17 @@ class AddTaskScreen extends StatelessWidget {
                   decoration: InputDecoration(
                     fillColor: Colors.lightBlueAccent,
                   ),
-                  controller: taskController,
+                  // controller: taskController,
+                  onChanged: (newText){
+                    addTask= newText;
+                  },
                 ),
                 SizedBox(height: 20.0,),
                 FlatButton(
                   color: Colors.lightBlueAccent,
-                  onPressed: () {},
+                  onPressed: () {
+                    widget.addToScreen(addTask);
+                   },
                   child: Text('Add',
                   style: TextStyle(
                     color: Colors.white,
@@ -59,3 +77,4 @@ class AddTaskScreen extends StatelessWidget {
     );
   }
 }
+
